@@ -6,7 +6,8 @@ namespace WordList {
     std::vector < std::string> words{
         "mystery", "broccoli", "accountant", "almost",
         "spaghetti", "opinion", "beautiful", "distance",
-        "luggage", "dungeon", "monster", "dragon" };
+        "luggage", "dungeon", "monster", "dragon" };  
+    // vector of all the possible words
 
     const std::string& getRandomWord() {
 
@@ -15,6 +16,7 @@ namespace WordList {
         return words[static_cast<std::size_t>(rand)];
     }
 }
+
 class Word {
 private: 
     std::string m_word{ WordList::getRandomWord() };
@@ -50,12 +52,7 @@ public:
 
 };
 
-void Test1() {
-    for (int i = 0; i < 20; i++)
-        std::cout << WordList::getRandomWord() << " ";
-}
-
-std::string replaceLetter(std::string& word, char letter, int& lives) { // overload la fct replace
+std::string replaceLetter(std::string& word, char letter, int& lives) { // overload of the replaceLetter() function
 
     for (int i{ 0 }; i < word.length(); i++) {
         if (word[i] == '+'){
@@ -104,7 +101,6 @@ int main()
 
     std::cout << "Welcome to Hangman!\n";
     std::cout << "The word: " << word_cpy.hideWord() << '\n';
-    //std::cout << "  " << word.getWord() << '\n';
     std::cout << "Wrong guesses: " << guess << '\n';
   
     while (true) {
@@ -122,19 +118,18 @@ int main()
             if (lives == 0) {
                 std::cout << "The word was: " << word.getWord();
                 std::cout << "\nGame over!\n";
-                break;
+                return;
             }
         }
         
         std::cout << "The word: " << word_cpy.getWord() << "  \n";
-        //std::cout << "  " << word.getWord() << '\n';
         std::cout << "Wrong guesses: " << guess << "\n\n";
         
         if (word_cpy.getWord() == word.getWord())
         {
             std::cout << "Game Over!\n";
             std::cout << "The word was: " << word.getWord();
-            break;
+            return;
         }
     }
     
